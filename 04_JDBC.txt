@@ -1,0 +1,18 @@
+-------------------- 개요 --------------------
+OJDBC : Oracle JDBC Driver
+
+
+
+
+
+
+
+-------------------- 세팅 --------------------
+font - basic - text font를 D2coding
+General - show heap status 체크박스 선택
+General - workspace - Refresh using native hooks or polling 체크박스 선택
+		   - text file encoding - other - UTF-8 선택
+
+해당 프로젝트 선택 Alt + Enter or 오른쪽 마우스 클릭 맨아래 Properties - Java Build Path - Libraries - Classpath - Add External JARs - ojdbc10.jar 파일 선택
+
+-------------------- 기타 --------------------
