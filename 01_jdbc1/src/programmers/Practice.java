@@ -12,17 +12,15 @@ public class Practice {
 	
 	
     public static int[] solution(int[] arr, int[] query) {
+    	int[] answer;    	
     	
 		for(int i = 0; i < query.length; i++) {
-			if(query[i] == 0) {
-				continue;
-			} else if(query[i] % 2 == 0) {
-				int[] arr1 = Arrays.copyOfRange(arr, 0, query[i] + 1);
-				arr = arr1;
-			} else if(query[i] % 2 != 0) {
-				int[] arr1 = Arrays.copyOfRange(arr, query[i], arr.length);
-				arr = arr1;
-			} 
+			if(query[i] % 2 == 0) {
+				answer = new int[arr.length - (arr.length - query[i])];
+				for(int x = 0; x <= query[i]; i++) {
+					
+				}
+			}
 		}
 		
         return arr;
