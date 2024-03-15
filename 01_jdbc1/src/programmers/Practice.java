@@ -12,18 +12,17 @@ public class Practice {
 	
 	
     public static int[] solution(int[] arr, int[] query) {
-    	int[] answer;    	
+    	int[] answer = arr;    	
     	
 		for(int i = 0; i < query.length; i++) {
 			if(query[i] % 2 == 0) {
-				answer = new int[arr.length - (arr.length - query[i])];
-				for(int x = 0; x <= query[i]; i++) {
-					
-				}
+				
+			} else {
+				
 			}
 		}
 		
-        return arr;
+        return answer;
     }
 	
 	
