@@ -9,19 +9,15 @@ public class Practice {
 		
 		System.out.println(solution(new String[] {"u", "u", "l", "r"}));
 		
-		LocalDateTime date = LocalDateTime.now();
-		
-		String second = String.valueOf(date.getSecond());
-		
-		System.out.println(second.charAt(1));
-		
 	}
 	
 	
 	public static String[] solution(String[] str_list) {
         String[] answer = {};
         
-        
+        for(int i = 0; i < str_list.length; i++) {
+        	
+        }
         
         return answer;
     }

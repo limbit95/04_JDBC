@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+	<comment>board-sql.xml File</comment>
+	
+	<entry key="selectAllBoard">
+		SELECT BOARD_NO, BOARD_TITLE, MEMBER_NM, CREATE_DT, READ_COUNT, 
+		(SELECT COUNT(*) FROM "COMMENT" SUB 
+		WHERE SUB.BOARD_NO = MAIN.BOARD_NO) COMMENT_COUNT
+		FROM "BOARD" MAIN 
+		JOIN "MEMBER" USING(MEMBER_NO)
+		WHERE DELETE_FL = 'N'
+		ORDER BY BOARD_NO
+	</entry>
+	
+	<entry key="selectBoard">
+		SELECT BOARD_NO, BOARD_TITLE, BOARD_CONTENT, MEMBER_NO, MEMBER_NM, READ_COUNT, CREATE_DT
+		FROM "BOARD"
+		JOIN "MEMBER" USING(MEMBER_NO)
+		WHERE DELETE_FL = 'N'
+		AND BOARD_NO = ?
+	</entry>
+	
+	<entry key="updateReadCount">
+		UPDATE "BOARD" SET
+		READ_COUNT = READ_COUNT + 1
+		WHERE BOARD_NO = ?
+	</entry>
+	
+	<entry key="insertBoard">
+		INSERT INTO "BOARD" VALUES(SEQ_BOARD_NO.NEXTVAL, ?, ?, DEFAULT, DEFAULT, DEFAULT, ?)
+	</entry>
+	
+	<entry key="updateBoard">
+		UPDATE "BOARD" SET
+		BOARD_TITLE = ?,
+		BOARD_CONTENT = ?
+		WHERE BOARD_NO = ?
+	</entry>
+	
+	<entry key="deleteBoard">
+		UPDATE "BOARD" B SET
+		DELETE_FL = 'Y'
+		WHERE MEMBER_NO = (SELECT MEMBER_NO
+						   FROM "MEMBER"
+						   WHERE B.BOARD_NO = ?
+						   AND MEMBER_PW = ?)
+	</entry>
+	
+</properties>

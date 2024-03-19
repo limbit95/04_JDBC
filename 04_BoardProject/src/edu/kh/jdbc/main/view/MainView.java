@@ -3,6 +3,7 @@ package edu.kh.jdbc.main.view;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+import edu.kh.jdbc.board.view.BoardView;
 import edu.kh.jdbc.main.model.service.MainService;
 import edu.kh.jdbc.member.model.dto.Member;
 import edu.kh.jdbc.member.view.MemberView;
@@ -15,6 +16,7 @@ public class MainView {
 	private MainService service = new MainService();
 	
 	private MemberView memberView = new MemberView(); 
+	private BoardView boardView = new BoardView();
 	
 	/**
 	 *  메인 메뉴 출력 View
@@ -33,7 +35,6 @@ public class MainView {
 
 					System.out.print("\n메뉴 선택 : ");
 					input = sc.nextInt();
-					sc.nextLine();
 					
 					switch(input) {
 						case 1: login(); break;
@@ -55,7 +56,7 @@ public class MainView {
 				
 					switch(input) {
 						case 1: memberView.memberMenu(); break;
-						case 2: /* 게시판기능view */ break;
+						case 2: boardView.boardMenu(); break;
 						case 3: 
 							System.out.println("\n=== 로그아웃 되었습니다 ===\n");
 							loginMember = null;
@@ -67,6 +68,7 @@ public class MainView {
 				
 			} catch(InputMismatchException e) {
 				System.out.println("\n*** 입력 형식이 올바르지 않습니다 ***\n");
+				sc.nextLine();
 				e.printStackTrace();
 				input = -1;
 			} catch(Exception e) {

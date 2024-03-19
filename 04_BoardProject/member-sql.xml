@@ -23,9 +23,30 @@
 		WHERE MEMBER_NO = ?
 	</entry>
 	
+	<!-- 4. 비밀번호 변경 강사님 SQL -->
+	<entry key="updatePassword2">
+		UPDATE "MEMBER" SET
+		MEMBER_PW = ?
+		WHERE MEMBER_PW = ?
+		AND MEMBER_NO = ?
+	</entry>
+	
 	<entry key="passwordCheck">
 		SELECT MEMBER_ID 
 		FROM "MEMBER"
+		WHERE MEMBER_NO = ?
+		AND MEMBER_PW = ?
+	</entry>
+	
+	<entry key="deleteMember">
+		DELETE FROM "MEMBER"
+		WHERE MEMBER_NO = ?
+	</entry>
+	
+	<!-- 5. 회원 탈퇴 강사님 SQL -->
+	<entry key="unRegisterMember">
+		UPDATE "MEMBER" SET
+		UNREGISTER_FL = 'Y'
 		WHERE MEMBER_NO = ?
 		AND MEMBER_PW = ?
 	</entry>

@@ -110,6 +110,34 @@ public class MemberDAO {
 		
 		return result;
 	}
+	
+	
+	/** 4. 비밀번호 변경 강사님 코드
+	 * @param conn
+	 * @param current
+	 * @param newPw1
+	 * @param memberNo
+	 * @return
+	 */
+	public int updatePassword2(Connection conn, String current, String newPw1, int memberNo) throws Exception{
+		int result = 0;
+		
+		try {
+			String sql = prop.getProperty("updatePassword2");
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, newPw1);
+			pstmt.setString(2, current);
+			pstmt.setInt(3, memberNo);
+			
+			result = pstmt.executeUpdate();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+	
 
 	/** 비밀번호 확인 SQL 수행 DAO
 	 * @param conn
@@ -122,6 +150,55 @@ public class MemberDAO {
 		
 		try {
 			String sql = prop.getProperty("passwordCheck");
+			
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, memberNo);
+			pstmt.setString(2, memberPw);
+			
+			result = pstmt.executeUpdate();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+	
+
+	/** 회원 탈퇴 SQL 수행 DAO
+	 * @param conn
+	 * @param memberNo
+	 * @return
+	 */
+	public int deleteMember(Connection conn, int memberNo) throws Exception {
+		int result = 0;
+		
+		try {
+			String sql = prop.getProperty("deleteMember");
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, memberNo);
+			
+			result = pstmt.executeUpdate();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+	
+
+	/** 회원 탈퇴 SQL 수행 DAO
+	 * @param conn
+	 * @param memberPw
+	 * @param memberNo
+	 * @return
+	 */
+	public int unRegisterMember2(Connection conn, String memberPw, int memberNo) throws Exception{
+		int result = 0;
+		
+		try {
+			String sql = prop.getProperty("unRegisterMember");
 			
 			pstmt = conn.prepareStatement(sql);
 			
