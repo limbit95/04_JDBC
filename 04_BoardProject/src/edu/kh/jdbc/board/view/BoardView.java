@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Scanner;
 
 import edu.kh.jdbc.board.model.dto.Board;
+import edu.kh.jdbc.board.model.dto.Comment;
 import edu.kh.jdbc.board.model.service.BoardService;
 import static edu.kh.jdbc.common.Session.*;
 
@@ -12,6 +13,9 @@ public class BoardView {
 
 	private Scanner sc = new Scanner(System.in);
 	private BoardService service = new BoardService();
+	
+	// 댓글 화면 출력 객체
+	private CommentView commentView = new CommentView();
 	
 	public void boardMenu() {
 		int input = -1;
@@ -121,77 +125,93 @@ public class BoardView {
 					board.getMemberName(), board.getCreateDate(), board.getReadCount());
 			System.out.println("--------------------------------------------------------\n");
 			System.out.println(board.getBoardContent());
-			System.out.println("\n--------------------------------------------------------");
+			System.out.println("--------------------------------------------------------");
 			
-			
-			// 여기서부터
-			if(board.getMemberNo() == loginMember.getMemberNo()) {
-				System.out.println("1. 수정 / 2. 삭제");
-				System.out.print("\n선택 : ");
-				int input2 = sc.nextInt();
-				sc.nextLine();
-				
-				if(input2 == 1) {
-					System.out.print("\n수정할 제목 입력 : ");
-					String boardTitle = sc.nextLine();
-					
-					StringBuilder sb = new StringBuilder();
-					
-					while(true) {
-						System.out.print("수정할 내용 입력(종료 q만 입력) : ");
-						String content = sc.nextLine();
-						
-						if(content.equals("q")) {
-							break;
-						}
-						
-						sb.append(content).append(" \n");
-					}
-					
-					System.out.print("수정한 게시글을 저장하시겠습니까? (Y/N) : ");
-					char charInput = sc.next().toUpperCase().charAt(0);
-					
-					if(charInput == 'Y') {
-						int result = service.updateBoard(input, boardTitle, sb);
-						if(result > 0) {
-							System.out.println("\n=== 게시글 수정 완료 ===\n");
-							return;							
-						} else {
-							System.out.println("\n*** 게시글 수정 실패 ***\n");
-							return;
-						}
-					} 
-					if(charInput == 'N') {
-						System.out.println("\n*** 게시글 수정 취소 ***\n");
-						return;
-					}
-				}
-				
-				if(input2 == 2) {
-					System.out.print("\n정말로 삭제하시겠습니까? (Y/N) : ");
-					char charInput2 = sc.next().toUpperCase().charAt(0);
-					
-					if(charInput2 == 'N') {
-						System.out.println("\n=== 게시글 삭제 취소 ===\n");
-						return;
-					}
-					
-					if(charInput2 == 'Y') {
-						System.out.print("비밀번호 확인 : ");
-						String Check = sc.next();
-						
-						int result = service.deleteBoard(input, Check);
-						
-						if(result > 0) {
-							System.out.println("\n=== 게시글 삭제 완료 ===\n");
-							
-							return;
-						} else {
-							System.out.println("\n*** 비밀번호가 일치하지 않습니다 ***\n");
-						}
-					}
+			// ****************************************************************************
+			// 해당 게시글의 댓글 목록 조회
+			if(!board.getCommentList().isEmpty()) {
+				for(Comment c : board.getCommentList()) {
+					System.out.println(c);
+					System.out.println("--------------------------------------------------------");
 				}
 			}
+			
+			// 댓글 메뉴 출력
+			// 1) 댓글 등록 - 누가 몇 번 게시글에 작성하는가?
+			// 2) 댓글 수정 - 누가 몇 번 게시글에 있는 몇 번 댓글을 수정할 것인가?
+			// 3) 댓글 삭제 - 누가 몇 번 게시글에 잇는 몇 번 댓글을 삭제할 것인가?
+			commentView.commentMenu(input);
+			
+			// ****************************************************************************
+			
+			// 여기서부터
+//			if(board.getMemberNo() == loginMember.getMemberNo()) {
+//				System.out.println("1. 수정 / 2. 삭제");
+//				System.out.print("\n선택 : ");
+//				int input2 = sc.nextInt();
+//				sc.nextLine();
+//				
+//				if(input2 == 1) {
+//					System.out.print("\n수정할 제목 입력 : ");
+//					String boardTitle = sc.nextLine();
+//					
+//					StringBuilder sb = new StringBuilder();
+//					
+//					while(true) {
+//						System.out.print("수정할 내용 입력(종료 q만 입력) : ");
+//						String content = sc.nextLine();
+//						
+//						if(content.equals("q")) {
+//							break;
+//						}
+//						
+//						sb.append(content).append(" \n");
+//					}
+//					
+//					System.out.print("수정한 게시글을 저장하시겠습니까? (Y/N) : ");
+//					char charInput = sc.next().toUpperCase().charAt(0);
+//					
+//					if(charInput == 'Y') {
+//						int result = service.updateBoard(input, boardTitle, sb);
+//						if(result > 0) {
+//							System.out.println("\n=== 게시글 수정 완료 ===\n");
+//							return;							
+//						} else {
+//							System.out.println("\n*** 게시글 수정 실패 ***\n");
+//							return;
+//						}
+//					} 
+//					if(charInput == 'N') {
+//						System.out.println("\n*** 게시글 수정 취소 ***\n");
+//						return;
+//					}
+//				}
+//				
+//				if(input2 == 2) {
+//					System.out.print("\n정말로 삭제하시겠습니까? (Y/N) : ");
+//					char charInput2 = sc.next().toUpperCase().charAt(0);
+//					
+//					if(charInput2 == 'N') {
+//						System.out.println("\n=== 게시글 삭제 취소 ===\n");
+//						return;
+//					}
+//					
+//					if(charInput2 == 'Y') {
+//						System.out.print("비밀번호 확인 : ");
+//						String Check = sc.next();
+//						
+//						int result = service.deleteBoard(input, Check);
+//						
+//						if(result > 0) {
+//							System.out.println("\n=== 게시글 삭제 완료 ===\n");
+//							
+//							return;
+//						} else {
+//							System.out.println("\n*** 비밀번호가 일치하지 않습니다 ***\n");
+//						}
+//					}
+//				}
+//			}
 			// 여기까지 나 혼자 시도해본 부분
 			
 			
@@ -201,6 +221,7 @@ public class BoardView {
 			e.printStackTrace();
 		}
 	}
+	
 	
 
 	/**

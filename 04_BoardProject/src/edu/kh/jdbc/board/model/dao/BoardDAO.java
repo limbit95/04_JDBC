@@ -147,6 +147,13 @@ public class BoardDAO {
 		return result;
 	}
 
+	
+	
+	
+	
+	
+	
+	
 	/** 본인이 작성한 게시글 수정 SQL 수행 DAO
 	 * @param conn
 	 * @param input
