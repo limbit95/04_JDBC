@@ -9,28 +9,27 @@ public class Practice {
 	public static void main(String[] args) {
 		
 		
-		System.out.println(solution("18446744073709551615", "287346502836570928366"));
+		System.out.println(solution(new String[] {"a","bc","d","efg","hi"}));
 		
 	}
 	
 	
-	public static String solution(String a, String b) {
-		StringBuilder sb = new StringBuilder();
-        int carry = 0;
-        int i = a.length() - 1, j = b.length() - 1;
+	public static int solution(String[] strArr) {
+        int answer = 0;
         
-        
-
-        while (i >= 0 || j >= 0 || carry > 0) {
-            int sum = carry;
-
-            if (i >= 0) sum += a.charAt(i--) - '0';
-            System.out.println(sum);
-            if (j >= 0) sum += b.charAt(j--) - '0';
-//            System.out.println(sum);
-            sb.append(sum % 10);
-            carry = sum / 10;
+        for(int i = 0; i < strArr.length; i++) {
+        	int cnt = 0;
+        	for(int x = 0; x < strArr.length; x++) {
+        		if(strArr[i].length() == strArr[x].length()) {
+        			cnt++;
+        		}
+        	}
+        	
+        	if(cnt > answer) {
+        		answer = cnt;
+        	}
         }
-        return sb.reverse().toString();
+        
+        return answer;
     }
 }
