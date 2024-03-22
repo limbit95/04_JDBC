@@ -17,16 +17,12 @@ public class Practice {
 	public static int solution(String[] strArr) {
         int answer = 0;
         
-        for(int i = 0; i < strArr.length; i++) {
-        	int cnt = 0;
-        	for(int x = 0; x < strArr.length; x++) {
-        		if(strArr[i].length() == strArr[x].length()) {
-        			cnt++;
+        int idx = 0;
+        while(strArr.length != idx) {
+        	for(String s : strArr) {
+        		if(strArr[idx].length() == s.length()) {
+        			
         		}
-        	}
-        	
-        	if(cnt > answer) {
-        		answer = cnt;
         	}
         }
         
