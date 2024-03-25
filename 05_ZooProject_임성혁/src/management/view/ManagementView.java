@@ -7,9 +7,12 @@ import java.io.IOException;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+import management.model.service.ManagementService;
+
 public class ManagementView {
 
 	private Scanner sc = new Scanner(System.in);
+	private ManagementService managementService = new ManagementService();
 	
 	public void zooManagementMenu() {
 		int input = 0;
@@ -53,88 +56,14 @@ public class ManagementView {
 		System.out.print("Acceptable Number : ");
 		int aceptNum = sc.nextInt();
 		
-//		File file = new File("/workspace/04_JDBC/05_ZooProject_임성혁/src/field/model/dto/" + type + "Field.java");
-//		File file2 = new File("/workspace/04_JDBC/05_ZooProject_임성혁/src/animal/model/dto/" + type + ".java");
-		
-		FileWriter fw = null;
-		BufferedWriter bw = null;
 		
 		try {
-//			if(!file.exists()) {
-//				if(file.createNewFile()) {
-//					System.out.println("\n=== " + type + "영역이 생성되었습니다 ===\n");
-//				}
-//				if(file2.createNewFile()) {
-//					System.out.println("\n=== " + type + "모델이 생성되었습니다 ===\n");
-//				}
-//			}
+			boolean result = managementService.createField(type, aceptNum);
 			
-			fw = new FileWriter("/workspace/04_JDBC/05_ZooProject_임성혁/src/field/model/dto/" + type + "Field.java");
-			bw = new BufferedWriter(fw);
-			
-			String fieldSet = "package field.model.dto;\r\n"
-					+ "\r\n"
-					+ "import java.util.List;\r\n"
-					+ "import animal.model.dto.Tiger;\r\n"
-					+ "\r\n"
-					+ "public class TigerField {\r\n"
-					+ "\r\n"
-					+ "	private String type;\r\n"
-					+ "	private int aceptNumber;\r\n"
-					+ "	private List<Tiger> tigerList;\r\n"
-					+ "	\r\n"
-					+ "	public TigerField() {}\r\n"
-					+ "\r\n"
-					+ "	public TigerField(String type, int aceptNumber, List<Tiger> tigerList) {\r\n"
-					+ "		super();\r\n"
-					+ "		this.type = type;\r\n"
-					+ "		this.aceptNumber = aceptNumber;\r\n"
-					+ "		this.tigerList = tigerList;\r\n"
-					+ "	}\r\n"
-					+ "\r\n"
-					+ "	@Override\r\n"
-					+ "	public String toString() {\r\n"
-					+ "		return \"TigerField [type=\" + type + \", aceptNumber=\" + aceptNumber + \", tigerList=\" + tigerList + \"]\";\r\n"
-					+ "	}\r\n"
-					+ "	\r\n"
-					+ "	public String getType() {\r\n"
-					+ "		return type;\r\n"
-					+ "	}\r\n"
-					+ "	public void setType(String type) {\r\n"
-					+ "		this.type = type;\r\n"
-					+ "	}\r\n"
-					+ "	public int getAceptNumber() {\r\n"
-					+ "		return aceptNumber;\r\n"
-					+ "	}\r\n"
-					+ "	public void setAceptNumber(int aceptNumber) {\r\n"
-					+ "		this.aceptNumber = aceptNumber;\r\n"
-					+ "	}\r\n"
-					+ "	public List<Tiger> getTigerList() {\r\n"
-					+ "		return tigerList;\r\n"
-					+ "	}\r\n"
-					+ "	public void setTigerList(List<Tiger> tigerList) {\r\n"
-					+ "		this.tigerList = tigerList;\r\n"
-					+ "	}\r\n"
-					+ "	\r\n"
-					+ "}";
-		
-			
-			fw = new FileWriter("/workspace/04_JDBC/05_ZooProject_임성혁/src/animal/model/dto/" + type + ".java");
-			bw = new BufferedWriter(fw);
-			
-			String animalSet = "";
-			
-			bw.write(fieldSet);
-			
-		}catch(IOException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
-		}finally {
-			try {
-				if(bw != null) bw.close();
-			}catch(Exception e) {
-				e.printStackTrace();
-			}
 		}
+		
 	}
 
 	public void selectField() {

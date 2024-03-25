@@ -306,7 +306,7 @@ public class MemberView {
 		
 		String code = service.createSecurityCode();
 		System.out.printf("보안문자 입력 [%s] : ", code); // 보안문자 입력 [240571] : 
-		String input = sc.next(); // 보안문자 입력]
+		String input = sc.next(); // 보안문자 입력
 		
 		// 보안문자 일치여부 확인
 		if(!input.equals(code)) { // 일치하지 않으면
@@ -326,10 +326,11 @@ public class MemberView {
 			if(check == 'Y') {
 				break; // 반복문 종료
 			}
+			
+			// 'Y', 'N'이 아닌 경우
+			System.out.println("\n*** 잘못 입력하셨습니다 ***\n");
 		}
 		
-		// 'Y', 'N'이 아닌 경우
-		System.out.println("\n*** 잘못 입력하셨습니다 ***\n");
 		
 		try {
 			   // 회원 탈퇴 서비스 호출
