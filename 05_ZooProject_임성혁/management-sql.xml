@@ -4,8 +4,8 @@
 	<comment>management-sql</comment>
 	
 	<entry key="createField">
-		CREATE TABLE ? (
-			?||_NO NUMBER PRIMARY KEY,
+		CREATE TABLE Tiger (
+			NO NUMBER PRIMARY KEY,
 			NAME VARCHAR(30) NOT NULL,
 			GENDER CHAR(1) NOT NULL CHECK(GENDER IN ('M', 'F')),
 			DATE_BIRTH DATE DEFAULT(SYSDATE),
