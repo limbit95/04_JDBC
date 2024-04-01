@@ -9,20 +9,19 @@ public class Practice {
 	public static void main(String[] args) {
 		
 		
-		System.out.println(solution(new String[] {"a","bc","d","efg","hi"}));
+		System.out.println(solution("abstract algebra"));
 		
 	}
 	
 	
-	public static int solution(String[] strArr) {
-        int answer = 0;
+	public static String solution(String myString) {
+        String answer = "";
         
-        int idx = 0;
-        while(strArr.length != idx) {
-        	for(String s : strArr) {
-        		if(strArr[idx].length() == s.length()) {
-        			
-        		}
+        for(int i = 0; i < myString.length(); i++) {
+        	if(myString.charAt(i) == 'a') {
+        		answer += myString.toUpperCase().charAt(i);
+        	} else {
+        		answer += myString.toLowerCase().charAt(i);
         	}
         }
         
